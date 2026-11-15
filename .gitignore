@@ -1,0 +1,15 @@
+# Ambiente virtual e caches
+.venv/
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Dados baixados pelo notebook (ver README)
+data/*
+!data/.gitkeep
+
+# Sistema
+.DS_Store
+Thumbs.db

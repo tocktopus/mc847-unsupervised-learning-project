@@ -1,0 +1,208 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{csquotes}
+\usepackage{kpfonts}
+\usepackage[a4paper,left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amssymb,amsthm,bm}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{pdflscape}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage[inline]{enumitem}
+\usepackage{url}
+\usepackage[style=numeric,backend=bibtex]{biblatex}
+\addbibresource{refs.bib}
+\usepackage[hidelinks]{hyperref}
+
+
+\onehalfspacing
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+\setlength{\headheight}{14pt}
+\captionsetup{font=small,labelfont=bf}
+\graphicspath{{figures/}}
+
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\theequation}{\arabic{equation}}
+\renewcommand{\thealgorithm}{\arabic{algorithm}}
+\renewcommand{\contentsname}{Sumário}
+\renewcommand{\bibname}{Referências}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MC847 -- Aprendizado Não Supervisionado}
+\fancyhead[R]{\small Trabalho Final}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+
+\definecolor{codegreen}{rgb}{0,0.5,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codeblue}{rgb}{0,0,0.65}
+\definecolor{codebg}{rgb}{0.97,0.97,0.97}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  backgroundcolor=\color{codebg},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{codeblue},
+  stringstyle=\color{codepurple},
+  numberstyle=\tiny\color{codegray},
+  numbers=left,
+  numbersep=5pt,
+  frame=tb,
+  breaklines=true,
+  breakatwhitespace=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  captionpos=b,
+  keepspaces=true
+}
+\lstdefinestyle{python}{language=Python}
+\lstdefinestyle{bash}{language=bash, numbers=none}
+
+
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO:} #1\textbf{]}}}
+
+
+\newcommand{\includelogo}[1][0.25\textwidth]{%
+  \IfFileExists{figures/Logo.png}{%
+    \includegraphics[width=#1]{figures/Logo.png}%
+  }{\IfFileExists{figures/Logo.pdf}{%
+    \includegraphics[width=#1]{figures/Logo.pdf}%
+  }{\IfFileExists{figures/Logo.jpg}{%
+    \includegraphics[width=#1]{figures/Logo.jpg}%
+  }{%
+    \fbox{\parbox[c][2.5cm][c]{0.25\textwidth}{\centering\small
+      Adicione \path{figures/Logo.png}}}%
+  }}}%
+}
+
+
+\newcommand{\figplaceholder}[3]{%
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/#1}
+    \caption{#2}
+    \label{#3}
+  \end{figure}
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace*{0.5cm}
+
+  \includelogo[0.22\textwidth]\\[1.2cm]
+
+  {\large\bfseries MC847 -- Aprendizado Não Supervisionado}\\[0.3cm]
+  {\large\bfseries Professor: Marcos Medeiros Raimundo}\\[1.4cm]
+
+  {\large\bfseries Trabalho Final -- Relatório}\\[0.5cm]
+  {\LARGE\bfseries Modelos de Recomendação e\\[0.2cm]
+   Análise de Espaços Latentes}\\[2.5cm]
+
+  {\large\bfseries Integrantes}\\[0.4cm]
+  \begin{tabular*}{0.78\textwidth}{@{\extracolsep{\fill}} l r}
+    Sara Beatriz da Silva Oliveira & 231288 \\[0.2cm]
+    Integrante 2                    & RA 2   \\
+  \end{tabular*}
+
+  \vfill
+
+  {\large Instituto de Computação}\\
+  {\large Universidade Estadual de Campinas}\\[0.3cm]
+  {\large Campinas, 2026}
+\end{titlepage}
+
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{2}
+\tableofcontents
+\clearpage
+
+
+
+\section{Problema, dados e protocolo}
+% - O problema de recomendação como aprendizado transdutivo em matrizes esparsas, com a notação usada: 𝑅,𝐳𝑢,𝐰𝑖,Ω.
+% - Análise dos dados: distribuição das notas, esparsidade, sinais de ausência não aleatória e perfil dos metadados.
+% - Protocolo: divisão treino/teste, validação cruzada, intervalos de confiança e métricas (RMSE, MAE, NLL e a métrica de lista, com a definição de acerto e de candidatos).
+
+
+\section{Modelos e suposições}
+% - O que cada modelo supõe e como é ajustado:
+%   - Baseline: vieses por mínimos quadrados regularizados.
+%   - PCA com imputação: aproximação de posto 𝑘 e efeitos da imputação pela média.
+%   - Fatoração de matrizes: perda nos dados observados, regularização 𝐿2 e SGD.
+%   - PPCA: modelo gerador, algoritmo EM e posterior gaussiana.
+%   - VAE: média e variância aprendidas por usuário, truque da reparametrização e ELBO.
+% - Comparação entre modelos determinísticos e probabilísticos.
+
+
+\section{Resultados}
+% - Tabela com todos os modelos no teste, com intervalos de confiança: RMSE e MAE; NLL para PPCA e VAE; e a métrica de lista.
+% - Comparação entre erro da nota (RMSE) e qualidade das listas.
+% - Fatoração com e sem vieses.
+% - PPCA e VAE linear com as mesmas suposições.
+% - Efeito do decodificador não linear e sensibilidade a 𝛽, 𝜎2 ou 𝑘.
+% - Convergência dos modelos, incluindo a curva em history do VAE.
+% - Tempo de treino e de inferência.
+
+\subsection{Etapa 1}
+
+\subsection{Etapa 2}
+
+
+\section{Análise dos Espaços Latentes}
+% - Projeções 2D (PCA e t-SNE) dos quatro modelos.
+% - Tabela com 𝑅2 (Ridge) e ROC-AUC (LogisticRegression) em dados não usados no ajuste, para os metadados de usuários e filmes.
+% - Comparação de distâncias e vizinhanças entre os modelos.
+% - Discussão: que informação cada espaço organiza melhor?
+
+
+\section{Projeto}
+% Pergunta, hipótese, experimento, previsão e o que refutaria a hipótese.
+% O que foi implementado.
+% Resultados: a hipótese foi confirmada ou refutada?
+% O que o resultado ensina sobre o problema ou sobre o espaço latente.
+
+\section{Conclusão}
+% Principais achados.
+% Limitações, como a abordagem transdutiva e o viés de seleção.
+% Próximos passos.
+
+\clearpage
+\section{Referências}
+
+
+\clearpage
+\appendix
+\renewcommand{\thesection}{\Alph{section}}
+\setcounter{section}{0}
+\section{Appendix}
+
+\end{document}
